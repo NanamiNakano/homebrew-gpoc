@@ -4,6 +4,7 @@ class GlobalprotectOpenconnect < Formula
   url "https://github.com/yuezk/GlobalProtect-openconnect/releases/download/v2.5.1/globalprotect-openconnect-2.5.1.tar.gz"
   sha256 "cbac9c19e50092ee565760fc59a353ff1c7568cdc55b8d09d4bd8980a23af29b"
   license "GPL-3.0-only"
+  revision 1
 
   livecheck do
     url :stable
