@@ -17,10 +17,14 @@ class GlobalprotectOpenconnect < Formula
   depends_on "pkgconf" => :build
   depends_on "rust" => :build
 
+  depends_on "gmp"
   depends_on "gnutls"
   depends_on "lz4"
-
   depends_on :macos
+  depends_on "nettle"
+  depends_on "openssl@3"
+  depends_on "p11-kit"
+
   uses_from_macos "libxml2"
   uses_from_macos "zlib"
 
