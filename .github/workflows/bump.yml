@@ -1,0 +1,23 @@
+name: Bump formula
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Bump Homebrew formula
+        uses: dawidd6/action-homebrew-bump-formula@v7
+        with:
+          token: ${{ secrets.HOMEBREW_BUMP_TOKEN }}
+          tap: NanamiNakano/homebrew-gpoc
+          formula: globalprotect-openconnect
+          livecheck: true
