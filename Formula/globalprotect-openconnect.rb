@@ -5,16 +5,21 @@ class GlobalprotectOpenconnect < Formula
   sha256 "cbac9c19e50092ee565760fc59a353ff1c7568cdc55b8d09d4bd8980a23af29b"
   license "GPL-3.0-only"
 
-  depends_on :macos
+  livecheck do
+    url :stable
+    strategy :github_latest
+  end
 
-  depends_on "rust" => :build
   depends_on "autoconf" => :build
   depends_on "automake" => :build
   depends_on "libtool" => :build
   depends_on "pkgconf" => :build
+  depends_on "rust" => :build
 
   depends_on "gnutls"
   depends_on "lz4"
+
+  depends_on :macos
   uses_from_macos "libxml2"
   uses_from_macos "zlib"
 
@@ -24,14 +29,9 @@ class GlobalprotectOpenconnect < Formula
 
     ENV["LIBTOOLIZE"] = "glibtoolize" if OS.mac?
 
-    system "cargo", "build", "--release", "--locked",
-                    "-p", "gpclient",
-                    "-p", "gpservice",
-                    "-p", "gpauth"
-
-    bin.install "target/release/gpclient"
-    bin.install "target/release/gpauth"
-    bin.install "target/release/gpservice"
+    system "cargo", "install", *std_cargo_args(path: "apps/gpclient")
+    system "cargo", "install", *std_cargo_args(path: "apps/gpauth")
+    system "cargo", "install", *std_cargo_args(path: "apps/gpservice")
 
     (libexec/"gpclient").install "packaging/files/usr/libexec/gpclient/hipreport.sh"
   end
@@ -40,10 +40,5 @@ class GlobalprotectOpenconnect < Formula
     assert_match "Usage", shell_output("#{bin}/gpclient --help")
     assert_match "Usage", shell_output("#{bin}/gpauth --help")
     assert_path_exists libexec/"gpclient/hipreport.sh"
-  end
-
-  livecheck do
-    url :stable
-    strategy :github_latest
   end
 end
