@@ -11,8 +11,8 @@ class GlobalprotectOpenconnect < Formula
   end
 
   bottle do
-    root_url "https://github.com/NanamiNakano/homebrew-gpoc/releases/download/globalprotect-openconnect-2.5.1_1"
-    sha256 cellar: :any, arm64_tahoe: "fc98e2a0d4289bc4c0b1485ffae9f6b044f2b937742e8599b6456d5eca979676"
+    root_url "https://github.com/NanamiNakano/homebrew-gpoc/releases/download/globalprotect-openconnect-2.5.3"
+    sha256 cellar: :any, arm64_tahoe: "ac660c5ef02e3b5a960187442c11b2a08f3fcd1355ce6b318e4bee7c44588eaa"
   end
 
   depends_on "autoconf" => :build
