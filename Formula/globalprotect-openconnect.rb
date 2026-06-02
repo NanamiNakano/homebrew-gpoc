@@ -4,6 +4,7 @@ class GlobalprotectOpenconnect < Formula
   url "https://github.com/yuezk/GlobalProtect-openconnect/releases/download/v2.5.4/globalprotect-openconnect-2.5.4.tar.gz"
   sha256 "c43a69bc83e45579c3bbe5bbb8181716245e8aa57b4e53f62a1f7514a9596009"
   license "GPL-3.0-only"
+  revision 1
 
   livecheck do
     url :stable
@@ -25,7 +26,7 @@ class GlobalprotectOpenconnect < Formula
   depends_on "gnutls"
   depends_on "lz4"
   depends_on :macos
-  depends_on "nettle"
+  depends_on "nettle@3"
   depends_on "openssl@3"
   depends_on "p11-kit"
 
@@ -37,6 +38,9 @@ class GlobalprotectOpenconnect < Formula
     system "tar", "-xJf", "vendor.tar.xz" if File.exist?("vendor.tar.xz")
 
     ENV["LIBTOOLIZE"] = "glibtoolize" if OS.mac?
+    nettle = Formula["nettle@3"]
+    ENV.prepend_path "PKG_CONFIG_PATH", nettle.opt_lib/"pkgconfig"
+    ENV.append "LDFLAGS", "-Wl,-rpath,#{nettle.opt_lib}"
 
     system "cargo", "install", *std_cargo_args(path: "apps/gpclient")
     system "cargo", "install", *std_cargo_args(path: "apps/gpauth")
