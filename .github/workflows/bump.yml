@@ -1,5 +1,8 @@
 name: Bump formula
 
+env:
+  HOMEBREW_NO_REQUIRE_TAP_TRUST: 1
+
 on:
   schedule:
     - cron: "0 3 * * *"
