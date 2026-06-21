@@ -1,10 +1,9 @@
 class GlobalprotectOpenconnect < Formula
   desc "CLI GlobalProtect VPN client based on OpenConnect"
   homepage "https://github.com/NanamiNakano/homebrew-gpoc"
-  url "https://github.com/yuezk/GlobalProtect-openconnect/releases/download/v2.5.4/globalprotect-openconnect-2.5.4.tar.gz"
-  sha256 "c43a69bc83e45579c3bbe5bbb8181716245e8aa57b4e53f62a1f7514a9596009"
+  url "https://github.com/yuezk/GlobalProtect-openconnect/releases/download/v2.6.0/globalprotect-openconnect-2.6.0.tar.gz"
+  sha256 "a699fa91dfadd71847747bb7d60cb0b356a039632ed6f09eb5d7621165509b81"
   license "GPL-3.0-only"
-  revision 1
 
   livecheck do
     url :stable
