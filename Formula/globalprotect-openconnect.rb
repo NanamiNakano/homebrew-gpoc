@@ -37,6 +37,13 @@ class GlobalprotectOpenconnect < Formula
     rm "rust-toolchain.toml", force: true
     system "tar", "-xJf", "vendor.tar.xz" if File.exist?("vendor.tar.xz")
 
+    gpclient_libexec = libexec/"gpclient"
+    inreplace "crates/openconnect/src/vpn_utils.rs" do |s|
+    s.gsub! "/usr/libexec/gpclient/hipreport.sh",
+            "#{gpclient_libexec}/hipreport.sh"
+    s.gsub! "/usr/libexec/gpclient/vpnc-script",
+            "#{gpclient_libexec}/vpnc-script"
+
     ENV["LIBTOOLIZE"] = "glibtoolize" if OS.mac?
     nettle = Formula["nettle@3"]
     ENV.prepend_path "PKG_CONFIG_PATH", nettle.opt_lib/"pkgconfig"
@@ -45,7 +52,7 @@ class GlobalprotectOpenconnect < Formula
     system "cargo", "install", *std_cargo_args(path: "apps/gpclient")
     system "cargo", "install", *std_cargo_args(path: "apps/gpauth")
 
-    (libexec/"gpclient").install "packaging/files/usr/libexec/gpclient"
+    libexec.install "packaging/files/usr/libexec/gpclient“
   end
 
   test do
