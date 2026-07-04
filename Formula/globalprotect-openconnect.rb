@@ -52,7 +52,7 @@ class GlobalprotectOpenconnect < Formula
     system "cargo", "install", *std_cargo_args(path: "apps/gpclient")
     system "cargo", "install", *std_cargo_args(path: "apps/gpauth")
 
-    libexec.install "packaging/files/usr/libexec/gpclient“
+    libexec.install "packaging/files/usr/libexec/gpclient"
   end
 
   test do
