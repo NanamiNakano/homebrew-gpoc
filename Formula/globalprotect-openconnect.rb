@@ -4,6 +4,7 @@ class GlobalprotectOpenconnect < Formula
   url "https://github.com/yuezk/GlobalProtect-openconnect/releases/download/v2.6.4/globalprotect-openconnect-2.6.4.tar.gz"
   sha256 "1f8504871b2dd1cea66abe36c3dbe178bc1917b23aeb915e70d54d50bec1a747"
   license "GPL-3.0-only"
+  revision 1
 
   livecheck do
     url :stable
@@ -43,9 +44,8 @@ class GlobalprotectOpenconnect < Formula
 
     system "cargo", "install", *std_cargo_args(path: "apps/gpclient")
     system "cargo", "install", *std_cargo_args(path: "apps/gpauth")
-    system "cargo", "install", *std_cargo_args(path: "apps/gpservice")
 
-    (libexec/"gpclient").install "packaging/files/usr/libexec/gpclient/hipreport.sh"
+    (libexec/"gpclient").install "packaging/files/usr/libexec/gpclient"
   end
 
   test do
